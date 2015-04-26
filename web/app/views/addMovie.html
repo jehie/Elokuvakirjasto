@@ -1,0 +1,34 @@
+
+<html>
+    <head>
+        <title>Add new Movie</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body ng-app>
+        <div ng-controller="AddMovieController">
+            <form name="movieForm">
+                <p>Title: <input name="movieTitle" ng-model="movieTitle" required ng-minlength="1">
+                <div ng-show="movieForm.movieTitle.$invalid && movieForm.movieTitle.$dirty">
+                    Title cannot be empty!
+                </div>
+                </p> 
+                <p>Director: <input name="movieDirector" ng-model="movieDirector" required ng-minlength="3">
+                <div ng-show="movieForm.movieDirector.$invalid && movieForm.movieDirector.$dirty">
+                    Director must have at least 3 characters!
+                </div></p>
+                <p>Year: <input name="movieYear" ng-model="movieYear" required ng-minlength="4">
+                <div ng-show="movieForm.movieYear.$invalid && movieForm.movieYear.$dirty">
+                    Not valid year!
+                </div></p>
+                <p>Description: <textarea ng-model="movieDescription" required ng-minlength="1"></textarea>
+                <div ng-show="movieForm.movieDescription.$invalid && movieForm.movieDescription.$dirty">
+                    Description cannot be empty!
+                </div></p></p>
+            </form>
+
+            <button ng-click="addMovie()"> Lisää elokuva </button>
+            {{message}}
+        </div>
+    </body>
+</html>

@@ -1,19 +1,26 @@
-ElokuvaApp.controller('AddMovieController', function ($scope, FirebaseService) {
+ElokuvaApp.controller('AddMovieController', function ($scope, FirebaseService, $location) {
 
-    $scope.message = 'asdd'
-    $scope.newMovie = 'asdds'
+
     
     $scope.addMovie = function () {
         console.log("xxxxxx")
-        if ($scope.newMovie !== '') {
+        if ($scope.movieTitle !== '' && $scope.movieDirector !== '' && $scope.movieYear !== '' && $scope.movieDescription !== '') {
 
 
             FirebaseService.addMovies({
-                title: 'LOTR',
-                director: 'Jamie Oliver',
-                release: 1990,
-                description: 'xx'
+                title: $scope.movieTitle,
+                director: $scope.movieDirector,
+                release: $scope.movieYear,
+                description: $scope.movieDescription
             });
+            
+            $scope.movieTitle = '';
+            $scope.movieDirector = '';
+            $scope.movieYear = '';
+            $scope.movieDescription = '';
+            
+             $location.path('/movies');
+            
 
             
         }
