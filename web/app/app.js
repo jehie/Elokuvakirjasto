@@ -14,6 +14,15 @@ ElokuvaApp.config(function ($routeProvider) {
                 controller: 'AddMovieController',
                 templateUrl: 'app/views/addMovie.html'
             })
+            .when('/movies/:key/edit', {
+                controller: 'editMovieController',
+                templateUrl: 'app/views/editMovie.html'
+            })
+            .when('/movies/:key', {
+                controller: 'viewMovieController',
+                templateUrl: 'app/views/viewMovie.html'
+            })
+
             .otherwise({
                 redirectTo: '/'
             });

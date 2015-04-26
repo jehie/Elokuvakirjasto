@@ -14,7 +14,7 @@ and open the template in the editor.
 
         <div ng-controller="ListController"><h1>Movies: </h1>
             <ul ng-repeat="movie in movies">
-                <li><b>Title:</b> {{movie.title}} 
+                <li><b>Title:</b> <a ng-href="#/movies/{{movie.$id}}">{{movie.title}}</a> <button ng-click="removeMovie(movie)">Delete Movie</button> 
                     <p><p/>
                     <b>Director</b>: {{movie.director}}
                     <p><p/>

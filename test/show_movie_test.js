@@ -5,28 +5,40 @@ describe('Show movie', function(){
 
   	beforeEach(function(){
   		// Lisää moduulisi nimi tähän
-    	module('MyAwesomeModule');
+    	module('ElokuvaApp');
 
-    	FirebaseServiceMock = (function(){
+    	FirebaseServiceMock = (function(){ 
 			return {
-				// Toteuta FirebaseServicen mockatut metodit tähän
+                            getMovie: function(key, done){
+                                if(key == 'abc123'){
+                                    done({
+                                        title: 'Batman 1',
+                                        director: 'Christopher Nolan',
+                                        year: '2005',
+                                        description: 'Epic movie'
+                                    } );
+                                } else {
+                                    done(null);
+                                }
+                            }
+				
 			}
 		})();
 
 		RouteParamsMock = (function(){
 			return {
-				// Toteuta mockattu $routeParams-muuttuja tähän
+				key: 'abc123'
 			}
 		});
 
 		// Lisää vakoilijat
-	    // spyOn(FirebaseServiceMock, 'jokuFunktio').and.callThrough();
+	     spyOn(FirebaseServiceMock, 'getMovie').and.callThrough();
 
     	// Injektoi toteuttamasi kontrolleri tähän
 	    inject(function($controller, $rootScope) {
 	      scope = $rootScope.$new();
 	      // Muista vaihtaa oikea kontrollerin nimi!
-	      controller = $controller('MyAwesomeController', {
+	      controller = $controller('viewMovieController', {
 	        $scope: scope,
 	        FirebaseService: FirebaseServiceMock,
 	       	$routePrams: RouteParamsMock
@@ -44,6 +56,8 @@ describe('Show movie', function(){
   	* käyttämällä toBeCalled-oletusta.
 	*/
 	it('should show current movie from Firebase', function(){
-		expect(true).toBe(false);
+            
+		expect(scope.elokuva.title).toEqual('Batman 1');
+                expect(FirebaseServiceMock.getMovie).toHaveBeenCalled();
 	});
 });
