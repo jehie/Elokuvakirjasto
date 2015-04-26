@@ -14,7 +14,7 @@ describe('Edit movie', function () {
                         done({
                             title: 'Batman 1',
                             director: 'Christopher Nolan',
-                            year: '2005',
+                            release: '2005',
                             description: 'Epic movie'
                         });
                     } else {
@@ -35,13 +35,14 @@ describe('Edit movie', function () {
         })();
 
         // Lisää vakoilijat
-        // spyOn(FirebaseServiceMock, 'jokuFunktio').and.callThrough();
+         spyOn(FirebaseServiceMock, 'getMovie').and.callThrough();
+         spyOn(FirebaseServiceMock, 'editMovie').and.callThrough();
 
         // Injektoi toteuttamasi kontrolleri tähän
         inject(function ($controller, $rootScope) {
             scope = $rootScope.$new();
             // Muista vaihtaa oikea kontrollerin nimi!
-            controller = $controller('MyAwesomeController', {
+            controller = $controller('editMovieController', {
                 $scope: scope,
                 FirebaseService: FirebaseServiceMock,
                 $routeParams: RouteParamsMock
@@ -59,7 +60,11 @@ describe('Edit movie', function () {
      * käyttämällä toBeCalled-oletusta.
      */
     it('should fill the edit form with the current information about the movie', function () {
-        expect(true).toBe(false);
+        expect(scope.movieTitle).toEqual('Batman 1');
+        expect(scope.movieDirector).toEqual('Christopher Nolan');
+        expect(scope.movieYear).toEqual('2005');
+        expect(scope.movieDescription).toEqual('Epic movie');
+        expect(FirebaseServiceMock.getMovie).toHaveBeenCalled();
     })
 
     /* 
@@ -68,7 +73,12 @@ describe('Edit movie', function () {
      * käyttämällä toBeCalled-oletusta.
      */
     it('should be able to edit a movie by its name, director, release date and description', function () {
-        expect(true).toBe(false);
+        scope.movieTitle = 'ASDASD';
+        scope.editMovie();
+        expect(FirebaseServiceMock.getMovie).toHaveBeenCalled();
+        expect(FirebaseServiceMock.editMovie).toHaveBeenCalled();
+        
+        
     });
 
     /*
@@ -77,6 +87,10 @@ describe('Edit movie', function () {
      * käyttämällä not.toBeCalled-oletusta.
      */
     it('should not be able to edit a movie if its name, director, release date or description is empty', function () {
-        expect(true).toBe(false);
+        scope.movieTitle = '';
+        scope.editMovie();
+        expect(FirebaseServiceMock.getMovie).toHaveBeenCalled();
+        expect(FirebaseServiceMock.editMovie).not.toHaveBeenCalled();
+        
     });
 });

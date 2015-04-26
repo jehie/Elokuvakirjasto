@@ -10,7 +10,7 @@ describe('Add movie', function () {
         FirebaseServiceMock = (function () {
             var movies = [];
             return {
-                addMovie: function (movie) {
+                addMovies: function (movie) {
                     movies.push(movie);
                 },
                 getMovies: function () {
@@ -20,7 +20,7 @@ describe('Add movie', function () {
         })();
 
         // Lisää vakoilijat
-        spyOn(FirebaseServiceMock, 'addMovie').and.callThrough();
+        spyOn(FirebaseServiceMock, 'addMovies').and.callThrough();
 
         // Injektoi toteuttamasi kontrolleri tähän
         inject(function ($controller, $rootScope) {
@@ -50,9 +50,9 @@ describe('Add movie', function () {
         scope.movieDescription = '1123123213';
         scope.movieDirector = '1232132ADD';
         scope.addMovie();
-
-        expect(movies.length).toBe(1);
-        expect(FirebaseServiceMock.addMovie).not.toHaveBeenCalled();
+        
+        expect(FirebaseServiceMock.getMovies().length).toBe(1);
+        expect(FirebaseServiceMock.addMovies).toHaveBeenCalled();
     });
 
     /*	
@@ -68,8 +68,8 @@ describe('Add movie', function () {
         scope.movieDirector = '1232132ADD';
         scope.addMovie();
 
-        expect(movies.length).toBe(0);
+        expect(FirebaseServiceMock.getMovies().length).toBe(0);
 
-        expect(FirebaseServiceMock.addMovie).not.toHaveBeenCalled();
+        expect(FirebaseServiceMock.addMovies).not.toHaveBeenCalled();
     });
 });

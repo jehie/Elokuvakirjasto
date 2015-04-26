@@ -66,11 +66,11 @@ describe('Movie list', function () {
      * käyttämällä toBeCalled-oletusta.
      */
     it('should list all movies from the Firebase', function () {
-        
-        
-        expect(scope.movies.length).toBe(3);
-        expect(scope.movies[0].name).toBe("Batman Begings");
-        expect(scope.movies[2].name).toBe("The Dark Knight Rises");
+
+        var leffat = FirebaseServiceMock.getMovies();
+        expect(leffat.length).toBe(3);
+        expect(leffat[0].title).toBe("Batman Begins");
+        expect(leffat[2].title).toBe("The Dark Knight Rises");
         expect(FirebaseServiceMock.getMovies).toHaveBeenCalled();
 
     });
@@ -81,6 +81,7 @@ describe('Movie list', function () {
      * käyttämällä toBeCalled-oletusta.
      */
     it('should be able to remove a movie', function () {
+        
         expect(true).toBe(false);
     });
 });
