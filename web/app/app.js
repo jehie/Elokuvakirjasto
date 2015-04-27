@@ -1,5 +1,9 @@
 var ElokuvaApp = angular.module('ElokuvaApp', ['firebase', 'ngRoute']);
 
+ElokuvaApp.config(['$httpProvider', function($httpProvider) {
+  delete $httpProvider.defaults.headers.common["X-Requested-With"]
+}]);
+
 ElokuvaApp.config(function ($routeProvider) {
     $routeProvider
             .when('/', {
@@ -17,6 +21,11 @@ ElokuvaApp.config(function ($routeProvider) {
             .when('/movies/:key/edit', {
                 controller: 'editMovieController',
                 templateUrl: 'app/views/editMovie.html'
+            })
+
+            .when('/find', {
+                controller: 'omdbController',
+                templateUrl: 'app/views/findMovie.html'
             })
             .when('/movies/:key', {
                 controller: 'viewMovieController',

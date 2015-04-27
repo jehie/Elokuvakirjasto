@@ -1,0 +1,28 @@
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <h2>Search movies here: </h2>
+
+
+        <div ng-controller="omdbController">
+            Movie title: <input ng-model="Title"> </input>
+            Movie year: <input ng-model="Year"> </input>
+            <button ng-click="findMovie()"> Find Movie! </button>
+
+            <h2><ng-pluralize count="length"
+                              when="{'0': 'No movies found!',
+                              'one': '1 movie found',
+                              'other': '{} movies found'}">
+                </ng-pluralize></h2>
+
+            <ul ng-repeat="movie in movies">
+                <li><a ng-href="http://www.imdb.com/title/{{movie.imdbID}}">{{movie.Title}}</a></li>
+            </ul>
+
+        </div>
+    </body>
+</html>

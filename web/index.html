@@ -8,12 +8,12 @@
     </head>
     
     <body ng-app="ElokuvaApp">
-        <h1>Elokuvakirjasto!</h1>
+        <h2>Elokuvakirjasto!</h2>
         
         
         <div ng-view></div>
 
-
+        <h1><a ng-href ="#/find"> Find movies! </a></h1>
         <!-- Hyödyllisiä kirjastoja -->
         <script src="bower_components/angular/angular.min.js"></script>
         <script src="bower_components/angular-route/angular-route.min.js"></script>
@@ -23,9 +23,11 @@
         <!-- Linkitä omat tiedostosi tähän (huomaa, että polun juuri on web-kansio!) -->
         <script src="app/app.js"></script>    
         <script src="app/services/FirebaseService.js"></script> 
+        <script src="app/services/omdbService.js"></script> 
         <script src="app/controllers/addmovie_controller.js"></script>  
         <script src="app/controllers/listmovies_controller.js"></script>  
         <script src="app/controllers/editmovie_controller.js"></script>
         <script src="app/controllers/viewmovie_controller.js"></script>
+         <script src="app/controllers/findmovie_controller.js"></script>
     </body>
 </html>
