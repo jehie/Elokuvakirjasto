@@ -1,7 +1,9 @@
-ElokuvaApp.controller('AddMovieController', function ($scope, FirebaseService, $location) {
+ElokuvaApp.controller('AddMovieController', function ($scope, currentAuth, FirebaseService, $location) {
+    if (!currentAuth) {
+        $location.path('/login');
+    }
 
 
-    
     $scope.addMovie = function () {
         console.log("xxxxxx")
         if ($scope.movieTitle !== '' && $scope.movieDirector !== '' && $scope.movieYear !== '' && $scope.movieDescription !== '') {
@@ -13,16 +15,16 @@ ElokuvaApp.controller('AddMovieController', function ($scope, FirebaseService, $
                 release: $scope.movieYear,
                 description: $scope.movieDescription
             });
-            
+
             $scope.movieTitle = '';
             $scope.movieDirector = '';
             $scope.movieYear = '';
             $scope.movieDescription = '';
-            
-             $location.path('/movies');
-            
 
-            
+            $location.path('/movies');
+
+
+
         }
     };
 

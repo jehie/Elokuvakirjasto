@@ -12,8 +12,12 @@
         
         
         <div ng-view></div>
-
-        <h1><a ng-href ="#/find"> Find movies! </a></h1>
+        
+        <h3><a ng-href ="#/movies"> Movies! </a></h3>
+        <h3><a ng-href ="#/login"> Login! </a></h3>
+        <h3><a ng-href ="#/movies/new"> Add new movie! </a></h3>
+        <h3><a ng-href ="#/find"> Find movies! </a></h3>
+        <button ng-click="logOut()" ng-show="userLoggedIn"> logOut </button>
         <!-- Hyödyllisiä kirjastoja -->
         <script src="bower_components/angular/angular.min.js"></script>
         <script src="bower_components/angular-route/angular-route.min.js"></script>
@@ -24,10 +28,12 @@
         <script src="app/app.js"></script>    
         <script src="app/services/FirebaseService.js"></script> 
         <script src="app/services/omdbService.js"></script> 
+        <script src="app/services/AuthenticationService.js"></script> 
         <script src="app/controllers/addmovie_controller.js"></script>  
         <script src="app/controllers/listmovies_controller.js"></script>  
         <script src="app/controllers/editmovie_controller.js"></script>
         <script src="app/controllers/viewmovie_controller.js"></script>
          <script src="app/controllers/findmovie_controller.js"></script>
+         <script src="app/controllers/user_controller.js"></script>
     </body>
 </html>

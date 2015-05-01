@@ -1,4 +1,9 @@
-ElokuvaApp.controller('editMovieController', function ($scope, FirebaseService, $routeParams, $location) {
+ElokuvaApp.controller('editMovieController', function ($scope, FirebaseService, currentAuth, $routeParams, $location) {
+    if (!currentAuth) {
+        $location.path('/login');
+    }
+
+
     FirebaseService.getMovie($routeParams.key, function (elokuva) {
         $scope.elokuva = elokuva;
         $scope.movieTitle = $scope.elokuva.title;
